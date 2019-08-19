@@ -1,12 +1,14 @@
 package com.example.chap12;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         datas.add("onCreate");
         adapter = new ArrayAdapter<String>(this, R.layout.item_main_list, datas);
         listView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        datas.add("onSaveInstanceState");
+        adapter.notifyDataSetChanged();
+        // Bundle 객체에 데이터 저장
+        outState.putString("data1", "hello");
+        outState.putInt("data2", 100);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        datas.add("onRestoreInstanceState");
+        adapter.notifyDataSetChanged();
+        // Bundle 객체에서 데이터 불러오기
+        String data1 = savedInstanceState.getString("data1");
+        int data2 = savedInstanceState.getInt("data2");
+        Toast.makeText(this, data1 + ":" + data2, Toast.LENGTH_SHORT).show();
     }
 
     @Override
