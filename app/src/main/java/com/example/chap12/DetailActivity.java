@@ -9,7 +9,7 @@ import android.widget.TextView;
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener{
 
     int count;
-    TextView countVeiw;
+    TextView countView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,13 +17,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_detail);
 
         Button btn=(Button)findViewById(R.id.detail_btn);
-        countVeiw=(TextView)findViewById(R.id.detail_count);
+        countView=(TextView)findViewById(R.id.detail_count);
         btn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         count++;
-        countVeiw.setText(String.valueOf(count));
+        countView.setText(String.valueOf(count));
     }
 }
