@@ -2,6 +2,7 @@ package com.example.chap12;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     ArrayAdapter<String> adapter;
     ArrayList<String> datas;
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == 100 && resultCode == RESULT_OK){
+            count = data.getIntExtra("count", 0);
+        }
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         datas.add("onStart");
@@ -97,7 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v == detailBtn){
             Intent intent = new Intent(this, DetailActivity.class);
-            startActivity(intent);
+            intent.putExtra("count", count);
+            startActivityForResult(intent, 100);
         }
         else if(v == dialogBtn){
             Intent intent = new Intent(this, DialogActivity.class);
