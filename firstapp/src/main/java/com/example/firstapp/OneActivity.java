@@ -18,9 +18,10 @@ public class OneActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                ComponentName componentName = new ComponentName("com.example.secondapp","com.example.secondapp.TwoActivity");
-                intent.setComponent(componentName);
+                Intent intent = new Intent("com.example.secondapp.ACTION_VIEW");
+//                ComponentName componentName = new ComponentName("com.example.secondapp","com.example.secondapp.TwoActivity");
+//                intent.setComponent(componentName);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
